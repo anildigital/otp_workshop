@@ -3,7 +3,7 @@ defmodule Calci.Calculator do
 
   alias Calci.Calculator
 
-  def start_link do
+  def start_link(_arg \\ []) do
     GenServer.start_link(__MODULE__, 0, name: __MODULE__)
   end
 
@@ -31,6 +31,10 @@ defmodule Calci.Calculator do
     GenServer.call(Calculator, :get)
   end
 
+  def reset() do
+    GenServer.cast(Calculator, :reset)
+  end
+
   def handle_call({:add, number}, _from, state) do
     {:reply, "add #{number}", state + number}
   end
@@ -50,5 +54,9 @@ defmodule Calci.Calculator do
   def handle_call(:get, _from, state) do
     :timer.sleep(1000)
     {:reply, state, state}
+  end
+
+  def handle_cast(:reset, _state) do
+    {:noreply, 0}
   end
 end

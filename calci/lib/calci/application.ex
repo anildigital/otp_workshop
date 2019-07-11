@@ -9,6 +9,7 @@ defmodule Calci.Application do
     children = [
       # Starts a worker by calling: Calci.Worker.start_link(arg)
       # {Calci.Worker, arg}
+      {Calci.Calculator, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
