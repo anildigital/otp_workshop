@@ -4,16 +4,16 @@ defmodule Calci.CalculatorTest do
   alias Calci.Calculator
 
   setup do
-    start_supervised(Calculator)
+    # start_supervised(Calculator)
     Calculator.reset()
+    Calculator.start_link()
     {:ok, %{}}
   end
 
   test "add 100" do
     Calculator.add(100)
-    result = Calculator.get()
 
-    assert 100 == result
+    assert 100 == Calculator.get()
   end
 
   test "add 100 twice" do
@@ -60,7 +60,7 @@ defmodule Calci.CalculatorTest do
     assert 3 == result
   end
 
-  # test "divide by 0" do
+  # test "divide by 0" do         #
   #   Calculator.add(100)
 
   #   assert_raise ArithmeticError, fn ->
